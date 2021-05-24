@@ -1,13 +1,15 @@
 const express = require("express");
 const port = 3000;
+const apiErrorHandler = require("./error/api-error-handler");
 
-const studentdRouter = require("./routes/students");
-// const subjectRouter = require("./routes/subject");
+const studentsRouter = require("./App/students/students.routes");
+const subjectsRouter = require("./App/subjects/subjects.routes");
 const app = express();
 
 app.use(express.json());
 
-app.use("/", studentdRouter);
-app.listen(port, () => {
-  console.log("############>>>>>>>>>>>", port);
-});
+app.use("/subjects", subjectsRouter);
+app.use("/students", studentsRouter);
+app.use(apiErrorHandler);
+
+app.listen(port, () => {});
